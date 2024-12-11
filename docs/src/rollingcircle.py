@@ -287,3 +287,4 @@ class RollingCircle(VGroup):
         )
 
         return anim
+
