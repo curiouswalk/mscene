@@ -211,6 +211,9 @@ class RollingCircle(VGroup):
 
         self.circle.angle = 0
 
+        for marker in self.markers:
+            marker.theta = marker.angle
+
         if about is None:
 
             distance = np.linalg.norm(direction)
@@ -249,12 +252,12 @@ class RollingCircle(VGroup):
 
             else:
 
-                point1 = np.array(
-                    [
-                        np.cos(alpha * direction + theta) * radius,
-                        np.sin(alpha * direction + theta) * radius,
-                        0.0,
-                    ]
+                point1_angle = alpha * direction + theta
+
+                point1 = ORIGIN + (
+                    np.cos(point1_angle) * radius,
+                    np.sin(point1_angle) * radius,
+                    0.0,
                 )
 
             self.circle.rotate(angle - self.circle.angle).move_to(point1)
@@ -265,9 +268,12 @@ class RollingCircle(VGroup):
 
             for marker in self.markers:
 
+                point2_angle = angle + marker.theta
+                marker.angle = point2_angle
+
                 point2 = point1 + (
-                    np.cos(angle + marker.angle) * marker.distance,
-                    np.sin(angle + marker.angle) * marker.distance,
+                    np.cos(point2_angle) * marker.distance,
+                    np.sin(point2_angle) * marker.distance,
                     0.0,
                 )
 
