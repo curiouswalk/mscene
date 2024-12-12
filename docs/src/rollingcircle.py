@@ -136,7 +136,7 @@ class RollingCircle(VGroup):
         """Transforms markers into target markers."""
 
         if idx is None:
-            markers = self.markers
+            markers = VGroup(*self.markers)
         else:
             markers = VGroup(*[self.markers[i] for i in idx])
 
@@ -160,7 +160,7 @@ class RollingCircle(VGroup):
         self.point = self.dot.get_center()
 
         if idx is None:
-            markers = self.markers
+            markers = VGroup(*self.markers)
         else:
             markers = VGroup(*[self.markers[i] for i in idx])
 
@@ -178,7 +178,7 @@ class RollingCircle(VGroup):
         """Traces the path of markers."""
 
         if idx is None:
-            markers = self.markers
+            markers = VGroup(*self.markers)
         else:
             markers = VGroup(*[self.markers[i] for i in idx])
 
