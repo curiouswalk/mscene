@@ -1,17 +1,30 @@
 # Cycloids
 
-<a href=""><img align="left" height="240px" src=""></a>
+<a href=""><img align="left" height="240px" src="https://img.youtube.com/vi/x7mstFh2R3s/maxresdefault.jpg"></a>
 
 ### Cycloidal Curves From Rolling Circles
 
 <p align="justify">Learn how a circle rolls along a straight line, creating a cycloid, and explore its variations, epicycloid, and hypocycloid, formed when it rolls along the outside or inside edge of another circle. Simulate with dynamic visuals to study the applications of these fascinating curves in various fields, including mathematics, physics, and engineering. Perfect for anyone curious about the geometry and dynamics of rolling motion!</p>
 
-[Open in Colab]&ensp;[mscene.curiouswalk.com/colab/cycloids](www.curiouswalk.com)
+[Open in Colab]&ensp;[mscene.curiouswalk.com/colab/cycloids](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/cycloids/cycloids.ipynb)
 
+### Contents
+- [Setup](#setup)
+- [Walkthrough](#walkthrough)
+- [Animation Scenes](#animation-scenes)
+  - [Cycloid](#cycloid)
+  - [Trochoids](#trochoids)
+  - [Epicycloid](#epicycloid)
+  - [Epitrochoids](#epitrochoids)
+  - [Hypocycloid](#hypocycloid)
+  - [Ellipses](#ellipses)
+  - [Two Circles Roll](#two-circles-roll)
+
+---
 
 ## Setup
 
-[Manim in Colab]&ensp;[mscene.curiouswalk.com/colab](https://mscene.curiouswalk.com/colab)
+[Manim in Colab]&ensp;[mscene.curiouswalk.com/colab](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb)
 
 Download `mscene.py` from [mscene.curiouswalk.com/src/mscene.py](https://mscene.curiouswalk.com/src/mscene.py) and complete this setup process to get started.
 
@@ -30,7 +43,7 @@ Download `mscene.py` from [mscene.curiouswalk.com/src/mscene.py](https://mscene.
 %run mscene setup
 ```
 
-## Rolling Circle
+### Rolling Circle
 
 Download `rollingcircle.py` from [mscene.curiouswalk.com/src/rollingcircle.py](https://mscene.curiouswalk.com/src/rollingcircle.py) and import `RollingCircle`.
 
@@ -42,7 +55,7 @@ Download `rollingcircle.py` from [mscene.curiouswalk.com/src/rollingcircle.py](h
 from rollingcircle import *
 ```
 
-### Test Scene
+#### Test Scene
 
 https://github.com/user-attachments/assets/c832e35d-7eb9-4607-8b5b-9700538395dc
 
@@ -251,8 +264,390 @@ class PathTraceScene(Scene):
 
 ## Animation Scenes
 
-**Scenes**&ensp;[mscene.curiouswalk.com/colab/cycloids](www.curiouswalk.com)
 
-**Colab**&ensp;[mscene.curiouswalk.com/colab/cycloids](www.curiouswalk.com)
+### Cycloid
+
+https://github.com/user-attachments/assets/71ad3ce9-10a9-4ef1-b9b5-4d67395781fa
+
+```python
+%%manim -qm Cycloid
+
+class Cycloid(Scene):
+    def construct(self):
+
+        length = config.frame_width * 0.75  # rolling distance
+        radius = length / (2 * TAU)  # radius set for 2 revolutions
+
+        num_line = NumberLine(
+            x_range=[-TAU, TAU, PI], length=length, color=ManimColor("#6F828A")
+        ).shift(DOWN * radius)
+
+        point = num_line.n2p(-TAU) + radius * UP
+
+        markers = [(1, PI / 2, ManimColor("#6019E3"))]  # add more markers
+
+        rc = RollingCircle(
+            radius=radius, color=ManimColor("#04D9FF"), markers=markers, point=point
+        )
+
+        text = Text("Cycloid").shift(2.5 * radius * DOWN)
+
+        self.add(text, num_line, rc)
+        self.wait(0.5)
+
+        path = rc.trace_paths()
+        self.add(path)
+
+        self.play(rc.roll(length * RIGHT, run_time=4))
+        self.wait()
+
+        path.clear_updaters()
+        self.play(path.animate.fade(2 / 3))
+
+        new_path = rc.trace_paths(dissipating_time=2)
+        self.add(new_path)
+
+        self.play(rc.roll(length * LEFT, run_time=4))
+        self.wait()
+
+        self.play(FadeOut(path))
+
+        new_path.clear_updaters()
+        self.wait(0.5)
+
+```
+
+### Trochoids
+
+https://github.com/user-attachments/assets/fb7cf376-b882-445f-8ed8-823a4df5a05f
+
+```python
+%%manim -qm Trochoids
+
+class Trochoids(Scene):
+    def construct(self):
+
+        length = config.frame_width * 0.75  # rolling distance
+        radius = length / (2 * TAU)  # radius set for 2 revolutions
+
+        num_line = NumberLine(
+            x_range=[-TAU, TAU, PI], length=length, color=ManimColor("#6F828A")
+        ).shift(DOWN * radius)
+
+        point = num_line.n2p(-TAU) + radius * UP
+
+        colors = [ManimColor(hex) for hex in ("#19E360", "#6019E3", "#E31937")]
+
+        markers = [
+            (1.5, PI / 2, colors[2]),
+            (1, PI / 2, colors[1]),
+            (0.5, PI / 2, colors[0]),
+        ]
+        # roll again with these markers
+        # markers = [(1.5, PI/2, colors[2]), (1, -PI/2, colors[1]), (.5, PI/2, colors[0])]
+
+        rc = RollingCircle(
+            radius=radius, color=ManimColor("#04D9FF"), markers=markers, point=point
+        )
+
+        labels = VGroup()
+        txt = ["Curtate Cycloid", "Cycloid", "Prolate Cycloid"]
+
+        for i in range(3):
+            text = Text(txt[i], font_size=40)
+            dot = Dot(radius=0.125, color=colors[i]).next_to(text[0], LEFT)
+            labels.add(VGroup(dot, text))
+
+        labels.arrange(RIGHT, buff=0.5).shift(2.5 * radius * DOWN)
+
+        self.add(labels, num_line, rc)
+        self.wait(0.5)
+
+        paths = rc.trace_paths()
+        self.add(paths)
+
+        self.play(rc.roll(length * RIGHT, run_time=4))
+        self.wait()
+
+        paths.clear_updaters()
+        self.play(paths.animate.fade(2 / 3))
+
+        new_paths = rc.trace_paths(dissipating_time=2)
+        self.add(new_paths)
+
+        self.play(rc.roll(length * LEFT, run_time=4))
+        self.wait()
+
+        self.play(FadeOut(paths))
+
+        new_paths.clear_updaters()
+        self.wait(0.5)
+
+```
+
+### Epicycloid
+
+https://github.com/user-attachments/assets/afb8f07e-f391-4089-bcf8-bd651d66076a
+
+```python
+%%manim -qm Epicycloid
+
+class Epicycloid(Scene):
+    def construct(self):
+
+        # config.frame_rate = 60 # higher frame_rate for smooth traced path; not required for longer run_time
+
+        k = 3  # k = R/r; R: radius of Circle, r: radius of RollingCirlce
+
+        angle = -TAU # rotation around Circle;
+        # -TAU (-2*PI) for one complete clockwise revolution around Circle
+
+        run_time = 4  # run_time of roll animation
+
+        # # play around
+        # k, angle, run_time = (2, -TAU, 4)
+        # k, angle, run_time = (1, -TAU, 4)
+        # k, angle, run_time = (1.5, -TAU*2, 8)
+        # k, angle, run_time = (.5, -TAU*2, 8)
+
+        h = config.frame_height * 3 / 8
+        r = h / (2 + k)
+
+        markers = [(1, PI / 2, ManimColor("#6019E3"))]
+
+        rc = RollingCircle(radius=r, color=ManimColor("#04D9FF"), markers=markers)
+
+        circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
+
+        text = Text("Epicycloid\nk = " + str(k)).to_corner(UL, buff=2 / 3)
+
+        rc.move(circle.get_top(), UP)
+
+        self.add(text, circle, rc)
+        self.wait(0.5)
+
+        path = rc.trace_paths()
+        self.add(path)
+
+        self.play(rc.roll(angle, about=circle, run_time=run_time))
+
+        path.clear_updaters()
+        self.wait(2)
+
+        self.play(FadeOut(path))
+        self.wait(0.5)
+
+```
+
+### Epitrochoids
+
+https://github.com/user-attachments/assets/5e683721-67d7-490c-b242-b58421eb4dba
+
+```python
+%%manim -qm Epitrochoids
+
+class Epitrochoid(Scene):
+    def construct(self):
+
+        k, angle, run_time = (3, -TAU, 4)
+        # k, angle, run_time = (1.5, -TAU*2, 8)
+
+        h = config.frame_height * 3 / 8
+        r = h / (2 + k)
+
+        markers = [
+            (1.5, PI / 2, ManimColor("#6019E3")),
+            (0.5, -PI / 2, ManimColor("#E31937")),
+        ]
+
+        rc = RollingCircle(radius=r, color=ManimColor("#04D9FF"), markers=markers)
+
+        circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
+
+        text = Text("Epitrochoid\nk = " + str(k)).to_corner(UL, buff=2 / 3)
+
+        rc.move(circle.get_top(), UP)
+
+        self.add(text, circle, rc)
+        self.wait(0.5)
+
+        paths = rc.trace_paths()
+        self.add(paths)
+
+        self.play(rc.roll(angle, about=circle, run_time=run_time))
+
+        paths.clear_updaters()
+        self.wait(2)
+
+        self.play(FadeOut(paths))
+        self.wait(0.5)
+
+```
+
+### Hypocycloid
+
+https://github.com/user-attachments/assets/e032563e-8735-43b9-b8f7-0c3c8805c92f
+
+```python
+%%manim -qm Hypocycloid
+
+class Hypocycloid(Scene):
+    def construct(self):
+
+        k, angle, run_time = (3, -TAU, 4)
+        # k, angle, run_time = (2.5, -TAU*2, 8)
+
+        h = config.frame_height * 3 / 8
+        r = h / k
+
+        markers = [(1, PI / 2, ManimColor("#6019E3"))]
+
+        rc = RollingCircle(radius=r, color=ManimColor("#04D9FF"), markers=markers)
+
+        circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
+
+        text = Text("Hypocycloid\nk = " + str(k)).to_corner(UL, buff=2 / 3)
+
+        rc.move(circle.get_top(), DOWN)
+
+        self.add(text, circle, rc)
+        self.wait(0.5)
+
+        paths = rc.trace_paths()
+        self.add(paths)
+
+        self.play(rc.roll(angle, about=circle, run_time=run_time))
+
+        paths.clear_updaters()
+        self.wait(2)
+
+        self.play(FadeOut(paths))
+        self.wait(0.5)
+
+```
+
+### Ellipses
+
+https://github.com/user-attachments/assets/dfbff5ca-7331-4d30-b8ca-8461f16b6a63
+
+```python
+%%manim -qm Ellipses
+
+class Ellipses(Scene):
+    def construct(self):
+
+        k, angle, run_time = (2, -TAU, 4)
+
+        h = config.frame_height * 3 / 8
+        r = h / k
+
+        ellipse_markers = [
+            (1.5, 0, ManimColor("#6019E3")),
+            (0.5, PI, ManimColor("#E31937")),
+        ]
+
+        rc = RollingCircle(
+            radius=r, color=ManimColor("#04D9FF"), markers=ellipse_markers
+        )
+        circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
+        text = Text("Hypotrochoids\n(Ellipses) k = " + str(k), font_size=44).to_corner(
+            UL, buff=2 / 3
+        )
+
+        rc.move(circle.get_top(), DOWN)
+
+        self.add(text, circle, rc)
+        self.wait(0.5)
+
+        line_markers = [
+            (1, PI / 2, ManimColor("#5A7D9A")),
+            (1, -PI / 2, ManimColor("#5A7D9A")),
+        ]
+        self.play(rc.draw_markers(line_markers))
+        self.wait()
+
+        ellipses = rc.trace_paths([0, 1])
+        lines = rc.trace_paths([2, 3])
+
+        self.add(lines, ellipses)
+
+        self.play(rc.roll(angle, about=circle, run_time=run_time))
+        self.wait()
+
+        lines.clear_updaters()
+        ellipses.clear_updaters()
+
+        self.play(
+            FadeOut(lines), ellipses.animate.fade(2 / 3), rc.undraw_markers([2, 3])
+        )
+        self.wait()
+
+        paths = rc.trace_paths(dissipating_time=run_time / 2)
+        self.add(paths)
+
+        self.play(rc.roll(angle * 2, about=circle, run_time=run_time * 2))
+        self.wait(2)
+
+        paths.clear_updaters()
+
+        self.play(FadeOut(ellipses, paths))
+        self.wait(0.5)
+
+```
+
+### Two Circles Roll
+
+https://github.com/user-attachments/assets/c3f701c5-374f-418f-b0c0-c7c474aa3e72
+
+```python
+%%manim -qm TwoCirclesRoll
+
+class TwoCirclesRoll(Scene):
+    def construct(self):
+
+        k, angle, run_time = (2.25, -4 * TAU, 16)
+        # k, angle, run_time = (2.8, -5 * TAU, 18)
+
+        h = config.frame_height * 3 / 8
+        r = h / (2 + k)
+
+        color_one = ManimColor("#6019E3")
+        color_two = ManimColor("#E31937")
+
+        rc_one_markers = [(1, PI / 2, color_one)]
+        rc_two_markers = [(1, -PI / 2, color_two)]
+
+        rc_one = RollingCircle(
+            radius=r, color=ManimColor("#04D9FF"), markers=rc_one_markers
+        )
+
+        rc_two = RollingCircle(
+            radius=r, color=ManimColor("#04D9FF"), markers=rc_two_markers
+        )
+
+        circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
+
+        rc_one.move(circle.get_top(), UP)
+        rc_two.move(circle.get_top(), DOWN)
+
+        rc_one_path = rc_one.trace_paths()
+        rc_two_path = rc_two.trace_paths()
+
+        self.add(circle, rc_one_path, rc_two_path, rc_one, rc_two)
+        self.wait(0.5)
+
+        self.play(
+            rc_one.roll(angle, about=circle, run_time=run_time),
+            rc_two.roll(angle, about=circle, run_time=run_time),
+        )
+
+        rc_one_path.clear_updaters()
+        rc_two_path.clear_updaters()
+        self.wait(2)
+
+        self.play(FadeOut(rc_one_path, rc_two_path))
+        self.wait(0.5)
+
+```
 
 ---
