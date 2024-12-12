@@ -1,6 +1,6 @@
 # Cycloids
 
-<a href=""><img align="left" height="240px" src="https://img.youtube.com/vi/x7mstFh2R3s/maxresdefault.jpg"></a>
+<a href="" target="_blank"><img align="left" height="240px" src="https://img.youtube.com/vi/x7mstFh2R3s/maxresdefault.jpg"></a>
 
 ### Cycloidal Curves From Rolling Circles
 
@@ -18,7 +18,7 @@
   - [Epitrochoids](#epitrochoids)
   - [Hypocycloid](#hypocycloid)
   - [Ellipses](#ellipses)
-  - [Two Circles Roll](#two-circles-roll)
+  - [Two Rolling Circles](#two-rolling-circles)
 
 ---
 
@@ -441,12 +441,12 @@ class Epicycloid(Scene):
 
 ### Epitrochoids
 
-https://github.com/user-attachments/assets/5e683721-67d7-490c-b242-b58421eb4dba
+https://github.com/user-attachments/assets/24e7945b-2b22-4e56-94e3-21dba0151a4e
 
 ```python
 %%manim -qm Epitrochoids
 
-class Epitrochoid(Scene):
+class Epitrochoids(Scene):
     def construct(self):
 
         k, angle, run_time = (3, -TAU, 4)
@@ -595,14 +595,14 @@ class Ellipses(Scene):
 
 ```
 
-### Two Circles Roll
+### Two Rolling Circles
 
-https://github.com/user-attachments/assets/c3f701c5-374f-418f-b0c0-c7c474aa3e72
+https://github.com/user-attachments/assets/d462c556-3dbd-4434-9ded-c96e48aff6e2
 
 ```python
-%%manim -qm TwoCirclesRoll
+%%manim -qm TwoRollingCircles
 
-class TwoCirclesRoll(Scene):
+class TwoRollingCircles(Scene):
     def construct(self):
 
         k, angle, run_time = (2.25, -4 * TAU, 16)
