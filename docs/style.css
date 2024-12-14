@@ -19,7 +19,8 @@ body {
 .banner-section {
     position: relative;
     padding: 75px 150px;
-    max-width: 1440px;
+/*     max-width: 1440px; */
+    max-width: 1080px;
     width: 75%;
     margin: auto;
     color: white;
@@ -54,7 +55,8 @@ blockquote {
     display: none;
     background-color: ghostwhite;
     margin: 30px;
-    max-width: 1440px;
+/*     max-width: 1440px; */
+    max-width: 1080px;
 /*    width:75%;*/
     padding: 45px;
 }
