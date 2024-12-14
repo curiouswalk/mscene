@@ -1,10 +1,10 @@
 # Cycloids
 
-<a href="" target="_blank"><img align="left" height="240px" src="https://img.youtube.com/vi/x7mstFh2R3s/maxresdefault.jpg"></a>
+<a href="https://www.youtube.com/watch?v=8d0qzpxyGEs" target="_blank"><img align="left" width="50%" src="/docs/assets/8d0qzpxyGEs.jpeg"></a>
 
 ### Cycloidal Curves From Rolling Circles
 
-<p align="justify">Learn how a circle rolls along a straight line, creating a cycloid, and explore its variations, epicycloid, and hypocycloid, formed when it rolls along the outside or inside edge of another circle. Simulate with dynamic visuals to study the applications of these fascinating curves in various fields, including mathematics, physics, and engineering. Perfect for anyone curious about the geometry and dynamics of rolling motion!</p>
+Learn how a circle rolls along a straight line, creating a cycloid, and explore its variations, epicycloid, and hypocycloid, formed when it rolls along the outside or inside edge of another circle. Roll circles in different configurations to draw various cycloidal curves and observe the intriguing patterns. Simulate with dynamic visuals to study the applications of these curves in multiple fields, including mathematics, physics, and engineering. Perfect for anyone curious about the geometry and dynamics of rolling motion!
 
 [Open in Colab]&ensp;[mscene.curiouswalk.com/colab/cycloids](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/cycloids/cycloids.ipynb)
 
@@ -264,7 +264,6 @@ class PathTraceScene(Scene):
 
 ## Animation Scenes
 
-
 ### Cycloid
 
 https://github.com/user-attachments/assets/71ad3ce9-10a9-4ef1-b9b5-4d67395781fa
@@ -400,11 +399,10 @@ class Epicycloid(Scene):
         k = 3  # k = R/r; R: radius of Circle, r: radius of RollingCirlce
 
         angle = -TAU # rotation around Circle;
-        # -TAU (-2*PI) for one complete clockwise revolution around Circle
 
         run_time = 4  # run_time of roll animation
 
-        # # play around
+        # roll again with these values
         # k, angle, run_time = (2, -TAU, 4)
         # k, angle, run_time = (1, -TAU, 4)
         # k, angle, run_time = (1.5, -TAU*2, 8)
@@ -419,7 +417,7 @@ class Epicycloid(Scene):
 
         circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
 
-        text = Text("Epicycloid\nk = " + str(k)).to_corner(UL, buff=2 / 3)
+        text = Text(f"Epicycloid\nk = {k}").to_corner(UL, buff=2 / 3)
 
         rc.move(circle.get_top(), UP)
 
@@ -464,7 +462,7 @@ class Epitrochoids(Scene):
 
         circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
 
-        text = Text("Epitrochoid\nk = " + str(k)).to_corner(UL, buff=2 / 3)
+        text = Text(f"Epitrochoids\nk = {k}").to_corner(UL, buff=2 / 3)
 
         rc.move(circle.get_top(), UP)
 
@@ -506,7 +504,7 @@ class Hypocycloid(Scene):
 
         circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
 
-        text = Text("Hypocycloid\nk = " + str(k)).to_corner(UL, buff=2 / 3)
+        text = Text(f"Hypocycloid\nk = {k}").to_corner(UL, buff=2 / 3)
 
         rc.move(circle.get_top(), DOWN)
 
@@ -531,7 +529,7 @@ class Hypocycloid(Scene):
 https://github.com/user-attachments/assets/dfbff5ca-7331-4d30-b8ca-8461f16b6a63
 
 ```python
-%%manim -qm Ellipses
+%%manim -ql Ellipses
 
 class Ellipses(Scene):
     def construct(self):
@@ -550,7 +548,7 @@ class Ellipses(Scene):
             radius=r, color=ManimColor("#04D9FF"), markers=ellipse_markers
         )
         circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
-        text = Text("Hypotrochoids\n(Ellipses) k = " + str(k), font_size=44).to_corner(
+        text = Text(f"Hypotrochoids\n(Ellipses) k = {k}", font_size=44).to_corner(
             UL, buff=2 / 3
         )
 
