@@ -4,7 +4,7 @@
 
 ### Cycloidal Curves From Rolling Circles
 
-Learn how a circle rolls along a straight line, creating a cycloid, and explore its variations, epicycloid, and hypocycloid, formed when it rolls along the outside or inside edge of another circle. Roll circles in different configurations to draw various cycloidal curves and observe the intriguing patterns. Simulate with dynamic visuals to study the applications of these curves in multiple fields, including mathematics, physics, and engineering. Perfect for anyone curious about the geometry and dynamics of rolling motion!
+<p align="justify">Learn how a circle rolls along a straight line, creating a cycloid, and explore its variations, epicycloid, and hypocycloid, formed when it rolls along the outside or inside edge of another circle. Roll circles in different configurations to draw various cycloidal curves and observe the intriguing patterns. Simulate with dynamic visuals to study the applications of these curves in multiple fields, including mathematics, physics, and engineering. Perfect for anyone curious about the geometry and dynamics of rolling motion!</p>
 
 [Open in Colab]&ensp;[mscene.curiouswalk.com/colab/cycloids](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/cycloids/cycloids.ipynb)
 
