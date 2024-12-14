@@ -7,7 +7,7 @@ document.getElementById("header")
         <img src="assets/cw.png" width="135px" style="float:left; margin-right: 25px;">
 
         <div style="margin-bottom:25px;">
-            <a class="button" href="https://www.curiouswalk.com">
+            <a class="button" href="https://www.curiouswalk.com" target="_blank">
                 <span>&nbsp;CuriousWalk&nbsp;</span>
                 <span class="hover-text">&nbsp;CuriousWalk&nbsp;</span>
                 <span class="link-text">curiouswalk.com</span>
@@ -15,7 +15,7 @@ document.getElementById("header")
         </div>
 
         <div style="margin-bottom:25px;">
-            <a class="button" href="https://github.com/curiouswalk/manimscene">
+            <a class="button" href="https://github.com/curiouswalk/mscene" target="_blank">
                 <span>&nbsp;Mscene&nbsp;</span>
                 <span class="hover-text">&nbsp;Mscene&nbsp;</span>
                 <span class="link-text">Open&nbsp;in&nbsp;GitHub</span>
@@ -49,7 +49,7 @@ for (var n = 0; n < v.length; n++) {
 
     let file = v[n].getAttribute("file");
 
-    let html = '<h2><a href="' + github_url + file + '">' + name + '</a></h2>';
+    let html = '<h2><a href="' + github_url + file + '" target="_blank">' + name + '</a></h2>';
 
     html += '<div id="vid_+' + id + '" ><a href="javascript:void(0)" onclick=playYT("' + id + '")><img class="ytframe" src="assets/' + id + '.jpeg"/></a></div>';
 
@@ -94,7 +94,7 @@ contentHtml += `
     <p>Manim is an animation engine designed to program precise animations for science videos. Google Colab (Colaboratory) is a hosted Jupyter Notebook service that requires no setup and provides free access to computing resources, including GPUs and TPUs.</p>
 
     <blockquote>
-        The Manim Community Developers. <cite>Manim — Mathematical Animation Framework</cite> [Computer software].<br><a href="https://https://www.manim.community/">www.manim.community</a>
+        The Manim Community Developers. <cite>Manim — Mathematical Animation Framework</cite> [Computer software].<br><a href="https://www.manim.community" target="_blank">www.manim.community</a>
     </blockquote>
 
     <a href="https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb" target="_blank">
@@ -120,7 +120,7 @@ document.getElementById("footer")
 <footer style="margin: 0;">
 <p style="color: slategray; text-align: center; margin: 25px auto;">
   Copyright &copy; ${year} CuriousWalk<br>
-  <a href="https://www.curiouswalk.com">curiouswalk.com</a>
+  <a href="https://www.curiouswalk.com" target="_blank">curiouswalk.com</a>
 </p>
 </footer>
 `;
