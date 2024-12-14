@@ -1,88 +1,16 @@
-[![cw_banner](https://github.com/curiouswalk/manim/assets/157306209/a20ef04c-9e8c-422f-97a7-27f78599dcd8)](https://www.curiouswalk.com)
+![mscene_banner](https://github.com/user-attachments/assets/7b3151d4-9de3-456e-8251-9a1d0ed5e815)
 
-# [Manim Animation](source)
+# Mscene
 
-**[Manim](https://www.manim.community/) is an animation engine for creating precise programmatic animations.**
+### Animate in Python With Manim<br>&emsp;[mscene.curiouswalk.com](https://mscene.curiouswalk.com)
 
-> [!TIP]
-> Manim in Colab: [`link.curiouswalk.com/colab/manim`](https://link.curiouswalk.com/colab/manim)
-> 
-> Project Source: [`link.curiouswalk.com/manim`](https://link.curiouswalk.com/manim)
-> 
-> Find us on [`www.curiouswalk.com`](https://www.curiouswalk.com)
+**Mscene** is a Python library for programming animation scenes with Manim in Google Colab to create science videos directly in the browser.
 
-Here are some animation scenes rendered from scripts written in Python using the Manim library.
+[Manim in Colab]&ensp;[mscene.curiouswalk.com/colab](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb)
 
-## [Fibonacci Spiral](source/fibonacci_spiral)
+Manim is an animation engine designed to program precise animations for science videos.<br>Google Colab (Colaboratory) is a hosted Jupyter Notebook service that requires no setup and provides free access to computing resources, including GPUs and TPUs.
 
-https://github.com/curiouswalk/manim/assets/157306209/5344fc22-f79c-4cd8-9e54-bab2b31bf095
 
-<p><a href="https://github.com/curiouswalk/manim/tree/main/source/fibonacci_spiral">
-            <img src="https://img.shields.io/badge/Source-link?style=plastic&logo=github&logoColor=white&labelColor=grey&color=green" height="23"
-            alt="Source"></a>&nbsp;
-<a href="https://colab.research.google.com/github/curiouswalk/manim/blob/main/source/fibonacci_spiral/fibonacci_spiral.ipynb">
-            <img src="https://img.shields.io/badge/Colab-Colab?style=plastic&logo=googlecolab&labelColor=grey&color=blue" height="23"
-            alt="Colab"></a>&nbsp;
-<a href="https://youtu.be/G9noslOdvMQ">
-            <img src="https://img.shields.io/badge/YouTube-link?style=plastic&logo=youtube&logoColor=red&labelColor=grey&color=red" height="23"
-            alt="YouTube"></a>&nbsp;</p>
+>**Manim**<br>The Manim Community Developers. *Manim &mdash; Mathematical Animation Framework* [Computer software].<br>[www.manim.community](https://www.manim.community)
 
-A Fibonacci spiral approximates the golden spiral using quarter-circle arcs inscribed in squares derived from the Fibonacci sequence.
-
-## [Wave Surface 3D](source/wave_surface_3d)
-
-**3D Manim Scene of Wave Animation**<br>
-YouTube Overview
-
-[![Watch the video](https://img.youtube.com/vi/x7mstFh2R3s/maxresdefault.jpg)](https://youtu.be/x7mstFh2R3s)
-
-<p><a href="https://github.com/curiouswalk/manim/tree/main/source/wave_surface_3d">
-            <img src="https://img.shields.io/badge/Source-link?style=plastic&logo=github&logoColor=white&labelColor=grey&color=green" height="23"
-            alt="Source"></a>&nbsp;
-<a href="https://colab.research.google.com/github/curiouswalk/manim/blob/main/source/wave_surface_3d/wave_surface_3d.ipynb">
-            <img src="https://img.shields.io/badge/Colab-Colab?style=plastic&logo=googlecolab&labelColor=grey&color=blue" height="23"
-            alt="Colab"></a>&nbsp;
-<a href="https://youtu.be/x7mstFh2R3s">
-            <img src="https://img.shields.io/badge/YouTube-link?style=plastic&logo=youtube&logoColor=red&labelColor=grey&color=red" height="23"
-            alt="YouTube"></a>&nbsp;</p>
-
-This animation features a 3D surface of waves.
-
-## [Koch Snowflake](source/koch_snowflake)
-
-https://github.com/user-attachments/assets/6208abcb-9d67-4fec-889c-eaff45afd811
-
-<p><a href="https://github.com/curiouswalk/manim/tree/main/source/koch_snowflake">
-            <img src="https://img.shields.io/badge/Source-link?style=plastic&logo=github&logoColor=white&labelColor=grey&color=green" height="23"
-            alt="Source"></a>&nbsp;
-<a href="https://colab.research.google.com/github/curiouswalk/manim/blob/main/source/koch_snowflake/koch_snowflake.ipynb">
-            <img src="https://img.shields.io/badge/Colab-Colab?style=plastic&logo=googlecolab&labelColor=grey&color=blue" height="23"
-            alt="Colab"></a>&nbsp;
-<a href="https://youtu.be/LD-S-7ZHgmI">
-            <img src="https://img.shields.io/badge/YouTube-link?style=plastic&logo=youtube&logoColor=red&labelColor=grey&color=red" height="23"
-            alt="YouTube"></a>&nbsp;</p>
-
-In mathematics, the intriguing concept of self-similarity emerges, wherein an object bears resemblance, either entirety or partially, to a smaller iteration of itself. A remarkable illustration of this phenomenon is the Koch Snowflake, showcasing the beauty of complexity inherent in self-similar geometric patterns. It is created by repeatedly dividing each side of an equilateral triangle into three segments and replacing the middle segment with a smaller equilateral triangle. This process leads to a shape with an infinite perimeter enclosing a finite area.
-
-## [Cycloid](source/cycloid)
-
-https://github.com/user-attachments/assets/994d9d55-bf86-4893-802f-79fd635cc27c
-
-<p><a href="https://github.com/curiouswalk/manim/tree/main/source/cycloid">
-            <img src="https://img.shields.io/badge/Source-link?style=plastic&logo=github&logoColor=white&labelColor=grey&color=green" height="23"
-            alt="Source"></a>&nbsp;
-<a href="https://colab.research.google.com/github/curiouswalk/manim/blob/main/source/cycloid/cycloid.ipynb">
-            <img src="https://img.shields.io/badge/Colab-Colab?style=plastic&logo=googlecolab&labelColor=grey&color=blue" height="23"
-            alt="Colab"></a>&nbsp;
-<a href="https://youtu.be/-H7CzIGcQk4">
-            <img src="https://img.shields.io/badge/YouTube-link?style=plastic&logo=youtube&logoColor=red&labelColor=grey&color=red" height="23"
-            alt="YouTube"></a>&nbsp;</p>
-
-A cycloid is a mathematical curve traced by a point on the circumference of a circle as it rolls along a straight line. A curtate cycloid, also known as a contracted cycloid, is traced by a point at a radius smaller than the radius of the rolling circle. On the other hand, a prolate cycloid, also known as an extended cycloid, is traced by a point at a radius greater than the radius of the rolling circle. Cycloids have significant applications in various fields, including mathematics, physics, and engineering.
-
------
-
-> [!NOTE]
-> **Manim**<br>
-> The Manim Community Developers. (2024). Manim – Mathematical Animation Framework (Version v0.18.0) [Computer software]. https://www.manim.community/
->
+---
