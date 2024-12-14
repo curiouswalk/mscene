@@ -11,9 +11,3 @@
 # [Wave Surface 3D](wave_surface_3d)
 ![wave_surface_3d](https://github.com/curiouswalk/manim/assets/157306209/945cafa7-4e84-4e64-a85a-1513ac5f42ca)
 
-# [Koch Snowflake](koch_snowflake)
-![cw_koch_snowflake](https://github.com/curiouswalk/manim/assets/157306209/33df9483-3906-47c4-9c3c-8becea305dc4)
-
-# [Cycloid](cycloid)
-![cw_cycloid](https://github.com/curiouswalk/manim/assets/157306209/c9d826d7-6812-47a6-be51-b482b196ac47)
-
