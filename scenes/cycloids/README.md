@@ -1,6 +1,6 @@
 # Cycloids
 
-<a href="https://www.youtube.com/watch?v=8d0qzpxyGEs" target="_blank"><img align="left" width="50%" src="/docs/assets/8d0qzpxyGEs.jpeg"></a>
+<a href="https://www.youtube.com/watch?v=tTs9e5Fu06c" target="_blank"><img align="left" width="50%" src="/docs/assets/tTs9e5Fu06c.jpeg"></a>
 
 ### Cycloidal Curves From Rolling Circles
 
