@@ -529,7 +529,7 @@ class Hypocycloid(Scene):
 https://github.com/user-attachments/assets/dfbff5ca-7331-4d30-b8ca-8461f16b6a63
 
 ```python
-%%manim -ql Ellipses
+%%manim -qm Ellipses
 
 class Ellipses(Scene):
     def construct(self):
@@ -543,14 +543,13 @@ class Ellipses(Scene):
             (1.5, 0, ManimColor("#6019E3")),
             (0.5, PI, ManimColor("#E31937")),
         ]
-
         rc = RollingCircle(
             radius=r, color=ManimColor("#04D9FF"), markers=ellipse_markers
         )
         circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
-        text = Text(f"Hypotrochoids\n(Ellipses) k = {k}", font_size=44).to_corner(
-            UL, buff=2 / 3
-        )
+
+        text = Text(f"Hypotrochoids\n(Ellipses) k = {k}", font_size=44)
+        text.to_corner(UL, buff=2 / 3)
 
         rc.move(circle.get_top(), DOWN)
 
@@ -604,7 +603,7 @@ class TwoRollingCircles(Scene):
     def construct(self):
 
         k, angle, run_time = (2.25, -4 * TAU, 16)
-        # k, angle, run_time = (2.8, -5 * TAU, 18)
+        # k, angle, run_time = (2.8, -5*TAU, 18)
 
         h = config.frame_height * 3 / 8
         r = h / (2 + k)
@@ -618,11 +617,9 @@ class TwoRollingCircles(Scene):
         rc_one = RollingCircle(
             radius=r, color=ManimColor("#04D9FF"), markers=rc_one_markers
         )
-
         rc_two = RollingCircle(
             radius=r, color=ManimColor("#04D9FF"), markers=rc_two_markers
         )
-
         circle = Circle(radius=k * r, color=ManimColor("#6F828A"))
 
         rc_one.move(circle.get_top(), UP)
@@ -638,7 +635,6 @@ class TwoRollingCircles(Scene):
             rc_one.roll(angle, about=circle, run_time=run_time),
             rc_two.roll(angle, about=circle, run_time=run_time),
         )
-
         rc_one_path.clear_updaters()
         rc_two_path.clear_updaters()
         self.wait(2)
