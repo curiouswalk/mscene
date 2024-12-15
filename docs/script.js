@@ -22,7 +22,7 @@ document.getElementById("header")
             </a>
         </div>
 
-        <h1 style="font-weight: normal; margin-bottom:0px">Program Animations in Python With Manim</h1>
+        <h1 style="font-weight: normal; margin-bottom:0px">Animations in Python With Manim</h1>
     
     </div>
 
