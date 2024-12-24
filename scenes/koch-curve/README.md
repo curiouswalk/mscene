@@ -11,7 +11,7 @@
 ### Contents
 - [Setup](#setup)
 - [Fractal](#fractal)
-- [Koch Curve](#koch-curve)
+- [Koch Curve](##koch-curve)
 - [Koch Snowflake](#koch-snowflake)
 - [Koch Antisnowflake](#koch-antisnowflake)
 - [Two Flakes](#two-flakes)
