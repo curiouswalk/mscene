@@ -4,9 +4,11 @@
 
 <a href="https://www.youtube.com/watch?v=fDGN3bGcXSg" target="_blank"><img align="left" width="50%" src="/docs/assets/fDGN3bGcXSg.jpeg"></a>
 
-<p align="justify">In mathematics, the intriguing concept of self-similarity emerges, wherein an object bears resemblance, either entirety or partially, to a smaller iteration of itself. A remarkable illustration of this is the Koch Curve, showcasing the beauty of complexity inherent in self-similar geometric patterns. A fractal formed from the Koch Curve is the Koch Snowflake. It is created by repeatedly dividing each side of an equilateral triangle into three segments and replacing the middle segment with a smaller equilateral triangle.</p>
+<p align="justify">In mathematics, the intriguing concept of self-similarity emerges, wherein an object bears resemblance, either entirety or partially, to a smaller iteration of itself. A remarkable illustration of this is the Koch Curve, showcasing the beauty of complexity inherent in self-similar geometric patterns. A fractal formed from the Koch Curve is the Koch Snowflake. It is created by repeatedly dividing each side of an equilateral triangle into three segments and replacing the middle segment with a smaller equilateral triangle. This process leads to a shape with an infinite perimeter enclosing a finite area.</p>
 
 [Open in Colab]&ensp;[mscene.curiouswalk.com/colab/koch-curve](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/koch-curve/koch-curve.ipynb)
+
+<br>
 
 ### Contents
 - [Setup](#setup)
