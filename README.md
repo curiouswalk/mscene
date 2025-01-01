@@ -1,8 +1,8 @@
-![mscene_banner](https://github.com/user-attachments/assets/5ffd9be5-d7e8-4b57-9cc5-3ff791ddd530)
+![mscene_banner](https://mscene.curiouswalk.com/assets/mscene_banner.png)
 
 # Mscene
 
-### Animate in Python With Manim<br>&emsp;[mscene.curiouswalk.com](https://mscene.curiouswalk.com)
+### Animate With Manim in Colab<br>&emsp;[mscene.curiouswalk.com](https://mscene.curiouswalk.com)
 
 **Mscene** is a Python library for programming animation scenes with Manim in Google Colab to create science videos directly in the browser.
 
