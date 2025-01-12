@@ -1,12 +1,13 @@
-![mscene_banner](https://mscene.curiouswalk.com/assets/mscene_banner.png)
+<div align="center"><img src="https://mscene.curiouswalk.com/assets/mscene_banner.png" alt="Mscene"/><div><a href="https://github.com/curiouswalk/mscene" target="_blank"><img src="https://img.shields.io/badge/GitHub-white?style=plastic&logo=github&logoColor=white&labelColor=grey" alt="GitHub" height="24"/></a>&emsp;&nbsp;<a href="https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb" target="_blank"><img src="https://img.shields.io/badge/Colab-white?style=plastic&logo=googlecolab&logoColor=%23F9AB00&labelColor=grey" alt="Colab" height="24"/></a>&emsp;&nbsp;<a href="https://pypi.org/project/mscene" target="_blank"><img src="https://img.shields.io/badge/PyPI-white?style=plastic&logo=pypi&logoColor=%23448ee4&labelColor=grey" alt="PyPI" height="24"/></a></div></div>
 
 # Mscene
 
-### Program Animations Online<br>&nbsp;&nbsp;[mscene.curiouswalk.com](https://mscene.curiouswalk.com)
+#### Program Animations Online<br>&ensp;[mscene.curiouswalk.com](https://mscene.curiouswalk.com)
 
 **Mscene** is a Python library for programming animation scenes with Manim in Google Colab to create science videos directly in the browser.
 
-[Manim in Colab]&nbsp;&nbsp;[mscene.curiouswalk.com/colab](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb)
+<a href="https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb"><img align="center" src="https://colab.research.google.com/assets/colab-badge.svg"></a>&ensp;[mscene.curiouswalk.com/colab](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb)
+
 
 #### Animate With Manim in Colab
 
