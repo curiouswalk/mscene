@@ -22,7 +22,7 @@ document.getElementById("header")
             </a>
         </div>
 
-        <h1 style="font-weight: normal; margin-bottom:0px">Animations in Python With Manim</h1>
+        <h1 style="font-weight: normal; margin-bottom:0px">Program Animations Online</h1>
     
     </div>
 
@@ -119,8 +119,7 @@ document.getElementById("footer")
     .innerHTML = `
 <footer style="padding: 15px 3px;">
 <p style="color: DimGrey; font-size: smaller; text-align: center;">
-  Copyright &copy; ${year} CuriousWalk<br>
-  <a href="https://www.curiouswalk.com" target="_blank">curiouswalk.com</a>
+  Copyright &copy; ${year} <a href="https://www.curiouswalk.com" target="_blank">CuriousWalk</a>
 </p>
 </footer>
 `;
