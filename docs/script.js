@@ -117,8 +117,8 @@ const year = new Date()
 
 document.getElementById("footer")
     .innerHTML = `
-<footer style="margin: 0;">
-<p style="color: slategray; font-size: small; text-align: center; margin: 20px auto;">
+<footer style="padding: 15px 3px;">
+<p style="color: DimGrey; font-size: smaller; text-align: center;">
   Copyright &copy; ${year} CuriousWalk<br>
   <a href="https://www.curiouswalk.com" target="_blank">curiouswalk.com</a>
 </p>
