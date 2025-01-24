@@ -124,6 +124,96 @@ class Wheel(VGroup):
 
             new_markers.add(new_marker)
 
+            self.markers.add(new_marker)
+
+        self.dot.set_z_index(1)
+
+        anim = GrowFromPoint(new_markers, self.point, **kwargs)
+
+        return anim
+
+    def transform_markers(self, targets, idx=None, **kwargs):
+        """Transforms markers into target markers."""
+
+        if idx is None:
+            markers = VGroup(*self.markers)
+        else:
+            markers = VGroup(*[self.markers[i] for i in idx])
+
+        anim = []
+
+        for marker, target in zip(markers, targets):
+
+            new_marker = self._get_marker(*target)
+            path_arc = self._get_arc_angle(marker, new_marker)
+
+            marker.distance = new_marker.distance
+            marker.angle = new_marker.angle
+
+            anim.append(Transform(marker, new_marker, path_arc=path_arc, **kwargs))
+
+        return anim
+
+    def undraw_markers(self, idx=None, **kwargs):
+        """Shrinks markers into the center point."""
+
+        self.point = self.dot.get_center()
+
+        if idx is None:
+            markers = VGroup(*self.markers)
+        else:
+            markers = VGroup(*[self.markers[i] for i in idx])
+
+        self.markers.remove(*markers)
+
+        self.dot.set_z_index(1)
+
+        anim = GrowFromPoint(
+            markers, self.point, reverse_rate_function=True, remover=True, **kwargs
+        )
+
+        return anim
+
+    def trace_paths(self, idx=None, stroke_width=4, **kwargs):
+        """Traces the path of markers."""
+
+        if idx is None:
+            markers = VGroup(*self.markers)
+        else:
+            markers = VGroup(*[self.markers[i] for i in idx])
+
+        paths = VGroup()
+
+        for marker in markers:
+            paths.add(
+                TracedPath(
+                    marker.dot.get_center,
+                    stroke_color=marker.dot.color,
+                    stroke_width=stroke_width,
+                    **kwargs
+                )
+            )
+
+        return paths
+
+    def roll(
+        self,
+        direction,
+        about=None,
+        reverse=False,
+        rate_func=linear,
+        run_time=2,
+        **kwargs
+    ):
+        """Rolls without sliding along a straight line or around another circle in the same plane."""
+
+        self.point = self.dot.get_center()
+
+        self.circle.angle = 0
+
+        for marker in self.markers:
+            marker.theta = marker.angle
+
         if about is None:
 
             distance = np.linalg.norm(direction)
