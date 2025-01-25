@@ -2,10 +2,12 @@
 
 A plugin for drawing roulette curves like cycloid, epicycloid, and hypocycloid by rolling a circle with markers plotting the curves. This allows for the simulation of a circle rolling along a straight line or another circle with markers tracing cycloidal curves, offering dynamic visuals to explore the geometry of roulette curves.
 
+<a href="https://www.youtube.com/watch?v=tTs9e5Fu06c" target="_blank"><img src="https://img.shields.io/badge/Video-grey?logo=youtube&logoColor=%23FF0000" height="24"></a>
+
 > [!NOTE]  
 > **This guide is specific to Google Colab.**<br>If Manim is already installed on your computer, run `pip install mscene` and `mscene-plugins` from the terminal to add the plugins. Then, import them with `from mscene.plugins import *` in your script.
 
-<a href="https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb"><img align="center" src="https://colab.research.google.com/assets/colab-badge.svg"></a>&ensp;[mscene.curiouswalk.com/colab](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb)
+<a href="https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb" target="_blank"><img align="center" src="https://colab.research.google.com/assets/colab-badge.svg"></a>&ensp;[mscene.curiouswalk.com/colab](https://colab.research.google.com/github/curiouswalk/mscene/blob/main/scenes/colab/mscene.ipynb)
 
 ## Setup
 
