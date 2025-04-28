@@ -2,6 +2,21 @@ from manim import *
 
 
 class FlashFade(AnimationGroup):
+    """
+    Animation for VMobject to fade-in or fade-out with flashing outline.
+
+    Args:
+        mob: The VMobject to animate.
+        mode: IN for fade-in, OUT for fade-out, or None for both.
+        reverse: If True, reverses the animation direction.
+        color: The color of the flash outline.
+        width: The stroke width of the flash outline.
+        time_width: The relative duration of the flash effect.
+        run_time: The duration of each sub-animation.
+        lag_ratio: The lag ratio between sub-animations.
+        **kwargs: Additional keyword arguments for AnimationGroup.
+    """
+
     def __init__(
         self,
         vmob: VMobject,
@@ -14,21 +29,6 @@ class FlashFade(AnimationGroup):
         lag_ratio=0.125,
         **kwargs,
     ):
-        """
-        Animation for VMobject to fade-in or fade-out with flashing outline.
-
-        Args:
-            mob: The VMobject to animate.
-            mode: IN for fade-in, OUT for fade-out, or None for both.
-            reverse: If True, reverses the animation direction.
-            color: The color of the flash outline.
-            width: The stroke width of the flash outline.
-            time_width: The relative duration of the flash effect.
-            run_time: The duration of each sub-animation.
-            lag_ratio: The lag ratio between sub-animations.
-            **kwargs: Additional keyword arguments for AnimationGroup.
-        """
-
         if reverse:
             vmob = vmob[::-1]
             vcopy = vmob.copy()
