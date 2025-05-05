@@ -3,17 +3,17 @@ from manim import *
 
 class FlashFade(AnimationGroup):
     """
-    Animation for VMobject to fade-in or fade-out with flashing outline.
+    Animation for VMobject to fade in or out with flashing outline effect.
 
     Args:
-        mob: The VMobject to animate.
-        mode: IN for fade-in, OUT for fade-out, or None for both.
-        reverse: If True, reverses the animation direction.
-        color: The color of the flash outline.
-        width: The stroke width of the flash outline.
-        time_width: The relative duration of the flash effect.
-        run_time: The duration of each sub-animation.
-        lag_ratio: The lag ratio between sub-animations.
+        vmob: The VMobject to animate.
+        mode: IN for fade-in, OUT for fade-out, None for fade-in then fade-out. Defaults to None.
+        reverse: If True, reverses the animation direction. Defaults to False.
+        color: The color of the flash outline. Defaults to None.
+        width: The stroke width of the flash outline. Defaults to None.
+        time_width: The relative duration of the flash effect. Defaults to 0.5.
+        run_time: The duration of each sub-animation. Defaults to 1.0.
+        lag_ratio: The lag ratio between sub-animations. Defaults to 0.125.
         **kwargs: Additional keyword arguments for AnimationGroup.
     """
 
