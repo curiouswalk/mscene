@@ -1,6 +1,44 @@
 from manim import *
 
 
+class DashFlow(DashedVMobject):
+    """
+    A dashed VMobject that continuously updates its dash offset for a dash shifting effect.
+
+    Args:
+        vmob (VMobject): The VMobject to be dashed and animated.
+        rate (float, optional): The rate at which dash offset shifts over time. Defaults to 1.
+        **kwargs: Additional keyword arguments passed to DashedVMobject.
+
+    Methods:
+        pause():
+            Suspend the dash animation.
+        resume():
+            Resume the dash animation.
+        clear():
+            Remove all updaters.
+    """
+
+    def __init__(self, vmob, rate=1, **kwargs):
+        super().__init__(vmob, **kwargs)
+        self.offset = 0
+
+        def _updater(m, dt):
+            self.offset = (rate * dt + self.offset) % 1
+            m.become(DashedVMobject(vmob, dash_offset=self.offset, **kwargs))
+
+        self.add_updater(_updater)
+
+    def pause(self):
+        self.suspend_updating()
+
+    def resume(self):
+        self.resume_updating()
+
+    def clear(self):
+        self.clear_updaters()
+
+
 class FlashFade(AnimationGroup):
     """
     Animation for VMobject to fade in or out with flashing outline effect.
