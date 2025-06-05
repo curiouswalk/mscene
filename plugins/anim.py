@@ -39,6 +39,45 @@ class DashFlow(DashedVMobject):
         self.clear_updaters()
 
 
+class DrawArc(Succession):
+    def __init__(self, arc, reverse=False, run_time=2, **kwargs):
+        quarter_time = run_time / 4
+        half_time = run_time / 2
+
+        if reverse:
+            line = Line(
+                arc.get_arc_center(),
+                arc.get_end(),
+                stroke_width=arc.get_stroke_width(),
+                stroke_color=arc.get_stroke_color(),
+            )
+            create_arc = Uncreate(arc, run_time=half_time)
+            rotate_line = Rotate(
+                line, -arc.angle, about_point=arc.get_arc_center(), run_time=half_time
+            )
+        else:
+            line = Line(
+                arc.get_arc_center(),
+                arc.get_start(),
+                stroke_width=arc.get_stroke_width(),
+                stroke_color=arc.get_stroke_color(),
+            )
+            create_arc = Create(arc, run_time=half_time)
+            rotate_line = Rotate(
+                line, arc.angle, about_point=arc.get_arc_center(), run_time=half_time
+            )
+
+        super().__init__(
+            Create(line, run_time=quarter_time),
+            AnimationGroup(
+                create_arc,
+                rotate_line,
+            ),
+            Uncreate(line, run_time=quarter_time),
+            **kwargs,
+        )
+
+
 class FlashFade(AnimationGroup):
     """
     Animation for VMobject to fade in or out with flashing outline effect.
