@@ -3,39 +3,42 @@ from manim import *
 
 class DashFlow(DashedVMobject):
     """
-    A dashed VMobject that continuously updates its offset for a dash flowing effect.
+    A dashed VMobject with its dash offset continuously shifting for a flowing effect.
 
     Args:
         vmob (VMobject): The VMobject to be dashed and animated.
-        rate (float, optional): The rate of shifting dash offset over time. Defaults to 1.0.
+        rate (float): The rate of shifting dash offset over time. Defaults to 1.
         **kwargs: Additional keyword arguments passed to DashedVMobject.
 
     Methods:
+        play():
+            Resume updater to play animation.
         pause():
-            Suspend the dash animation.
-        resume():
-            Resume the dash animation.
-        clear():
-            Remove all updaters.
+            Suspend updater to pause animation.
+        stop():
+            Clear updater to stop animation.
     """
 
-    def __init__(self, vmob, rate=1, **kwargs):
-        super().__init__(vmob, **kwargs)
-        self.offset = 0
+    def __init__(self, vmob, rate=1, dash_offset=0, **kwargs):
+        vmob = vmob.copy()
+        super().__init__(vmob, dash_offset=dash_offset, **kwargs)
 
-        def _updater(m, dt):
-            self.offset = (rate * dt + self.offset) % 1
-            m.become(DashedVMobject(vmob, dash_offset=self.offset, **kwargs))
+        self.rate = rate
+        self.offset = dash_offset
+
+        def _updater(mobj, dt):
+            self.offset = (self.offset + dt * self.rate) % 1
+            mobj.become(DashedVMobject(vmob, dash_offset=self.offset, **kwargs))
 
         self.add_updater(_updater)
+
+    def play(self):
+        self.resume_updating()
 
     def pause(self):
         self.suspend_updating()
 
-    def resume(self):
-        self.resume_updating()
-
-    def clear(self):
+    def stop(self):
         self.clear_updaters()
 
 
