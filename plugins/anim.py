@@ -129,7 +129,7 @@ class FlashFade(AnimationGroup):
                     AnimationGroup(
                         FadeIn(vmob[i]),
                         ShowPassingFlash(vcopy[i], time_width=time_width),
-                        duration=duration,
+                        run_time=duration,
                     )
                 )
         elif mode == "OUT":
@@ -138,7 +138,7 @@ class FlashFade(AnimationGroup):
                     AnimationGroup(
                         FadeOut(vmob[i]),
                         ShowPassingFlash(vcopy[i], time_width=time_width),
-                        duration=duration,
+                        run_time=duration,
                     )
                 )
         else:
@@ -147,7 +147,7 @@ class FlashFade(AnimationGroup):
                     AnimationGroup(
                         FadeIn(vmob[i].copy(), rate_func=there_and_back_with_pause),
                         ShowPassingFlash(vcopy[i], time_width=time_width),
-                        duration=duration,
+                        run_time=duration,
                     )
                 )
 
