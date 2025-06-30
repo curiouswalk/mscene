@@ -1,3 +1,5 @@
+"""A plugin for custom animations designed to enhance visuals in Manim scenes."""
+
 from manim import *
 
 
