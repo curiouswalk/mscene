@@ -1,3 +1,9 @@
+"""
+Mscene: Fibonacci Spiral
+
+https://mscene.curiouswalk.com/scenes/fibonacci-spiral
+"""
+
 from manim import *
 
 
