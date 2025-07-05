@@ -1,10 +1,8 @@
 from manim import *
 
-__scenes__ = ["SceneOne", "SceneTwo", "SceneThree"]
 
-
-def fib_seq(n, a=0, b=1):
-    """Returns a list of the first n terms, starting with the values a and b."""
+def fseq(n, a=0, b=1):
+    """Return the first n Fibonacci numbers starting with a and b."""
     seq = []
     for _ in range(n):
         seq.append(a)
@@ -12,167 +10,167 @@ def fib_seq(n, a=0, b=1):
     return seq
 
 
-def seq2str(seq):
-    """Returns a string of numbers in sequence."""
-    seq_str = ", ".join(map(str, seq)) + ", ..."
-    return seq_str
-
-
-def fib_spiral_mobj(seq, sf=1, add_dots=True):
-    """Returns Mobjects for Fibonacci spiral.
+def fsmob(n, width=None, height=None):
+    """VGroup of Mobjects creating the Fibonacci spiral.
 
     Args:
-        seq (list[int]): List of Fibonacci numbers.
+        n (int): Number of first Fibonacci terms.
+        width (float | None): Width of the object (default: None).
+        height (float | None): Height of the object (default: None).
 
     Returns:
-        VGroup: A group of Mobjects:
-                Square, Text, ArcBetweenPoints and Dot.
+        VGroup of Square, Text, ArcBetweenPoints and Dot.
     """
+    sqr_color = ManimColor("#214761")
+    txt_color = ManimColor("#516572")
+    arc_color = ManimColor("#04d9ff")
+    dot_color = ManimColor("#cfff04")
 
-    sqr_clr, dot_clr, sprl_clr = [
-        ManimColor(hex) for hex in ("#214761", "#cfff04", "#04d9ff")
-    ]
+    seq = fseq(n, 1)
+
+    if width and not height:
+        scale = width / sum(seq[-2:])
+    elif height and not width:
+        scale = height / seq[-1]
+    else:
+        scale = 1
 
     mobjects = VGroup()
     squares = VGroup()
 
-    direction = (UP, RIGHT, DOWN, LEFT)
-    corner = (DL, UL)
-    dot_index = (0, 0, -1, -1)
+    if len(seq) % 2:
+        angle = PI / 2
+        direction = (RIGHT, UP, LEFT, DOWN)
+        dot_index = (0, -1, -1, 0)
+    else:
+        angle = -PI / 2
+        direction = (UP, RIGHT, DOWN, LEFT)
+        dot_index = (0, 0, -1, -1)
 
-    for i, n in enumerate(seq):
-        square = Square(n * sf, stroke_width=6, color=sqr_clr).next_to(
-            squares, direction[i % 4], buff=0
+    corner = (DL, UL)
+
+    for i, t in enumerate(seq):
+        square = Square(t * scale, stroke_width=6, color=sqr_color).next_to(
+            squares,
+            direction[i % 4],
+            buff=0,
         )
 
         dots = VGroup(
-            Dot(square.get_corner(corner[i % 2]), color=dot_clr),
-            Dot(square.get_corner(-corner[i % 2]), color=dot_clr),
+            Dot(square.get_corner(corner[i % 2]), color=dot_color),
+            Dot(square.get_corner(-corner[i % 2]), color=dot_color),
         )
 
-        spiral = ArcBetweenPoints(
+        arc = ArcBetweenPoints(
             dots[dot_index[i % 4]].get_center(),
             dots[dot_index[i % 4] + 1].get_center(),
-            angle=-PI / 2,
-            color=sprl_clr,
+            angle=angle,
+            color=arc_color,
             stroke_width=6,
         )
-        num = (
-            Text(f"{n}×{n}", fill_opacity=2 / 3)
+
+        text = (
+            Text(f"{t}×{t}", color=txt_color)
             .scale_to_fit_width(square.width * 0.5)
             .move_to(square)
         )
 
+        vgrp = VGroup(square, text, arc, dots)
+        vgrp[2:].set_z_index(1)
         squares.add(square)
+        mobjects.add(vgrp)
 
-        if add_dots:
-
-            vgroup = VGroup(square, num, spiral, dots)
-        else:
-            vgroup = VGroup(square, num, spiral)
-
-        vgroup[1:].set_z_index(1)
-        mobjects.add(vgroup)
-        mobjects.center()
+    mobjects.center()
 
     return mobjects
 
 
-def text_spiral_anim(text):
-    """Text animation that spirals in and out."""
-    text_group = VGroup()
-    for t in text:
-        text_group.add(*t)
+def spiral_anim(mob, mode="IN", lag_ratio=0.125, **kwargs):
+    """Return an AnimationGroup for spiral animation."""
 
-    anim_in = SpiralIn(text_group, scale_factor=0)
-    anim_out = SpiralIn(
-        text_group,
-        scale_factor=0,
-        rate_func=lambda t: smooth(1 - t),
-    )
+    if mode == "IN":
 
-    anim = (anim_in, anim_out)
+        anim = [(FadeIn(i[0]), Write(i[1]), Create(i[2]), FadeIn(i[3])) for i in mob]
+    elif mode == "OUT":
+        anim = [
+            (FadeOut(i[0]), Unwrite(i[1]), Uncreate(i[2]), FadeOut(i[3]))
+            for i in mob[::-1]
+        ]
+    else:
+        raise ValueError("mode must be 'IN' or 'OUT'")
 
-    return anim
+    return AnimationGroup(*anim, lag_ratio=lag_ratio, **kwargs)
 
 
 class SceneOne(Scene):
     def construct(self):
-        size = 6
-        seq = fib_seq(size, 1)
-        frame_sizes = (config.frame_width, config.frame_height)
-        sf = frame_sizes[size % 2] / sum(seq[-2:]) * 0.75
-        mobj = fib_spiral_mobj(seq, sf)
+        seq = fseq(25)
+        width = config.frame_width * 3 / 4
+        seq_str = ", ".join(map(str, seq)) + ", ..."
 
-        text_width = config.frame_width / 2
-        text_group = VGroup(
-            *[Text(t).scale_to_fit_width(text_width) for t in ("Fibonacci", "Spiral")]
-        ).arrange(DOWN)
-        text_anim_in, text_anim_out = text_spiral_anim(text_group)
+        title = Text("Fibonacci Sequence").scale_to_fit_width(width * 3 / 4)
+        text = MarkupText(seq_str, width=width, justify=True, font_size=130)
+        VGroup(title, text).arrange(DOWN, buff=3 / 4)
 
-        spiral_anim_in = [
-            (FadeIn(i[0]), Write(i[1]), Create(i[2]), FadeIn(i[3])) for i in mobj
-        ]
-        spiral_anim_out = [
-            (FadeOut(i[0]), Unwrite(i[1]), Uncreate(i[2]), FadeOut(i[3]))
-            for i in mobj[::-1]
-        ]
-
-        self.play(text_anim_in)
-        self.wait()
-        self.play(text_anim_out)
-        self.wait()
-        self.play(AnimationGroup(*spiral_anim_in, lag_ratio=0.125))
-        self.wait(2.5)
-        self.play(AnimationGroup(*spiral_anim_out, lag_ratio=0.125))
-        self.wait(0.5)
+        self.play(Write(title), Write(text, run_time=3))
+        self.wait(3)
 
 
 class SceneTwo(Scene):
     def construct(self):
-        size = 18
-        seq = fib_seq(size, 1)
-        frame_sizes = (config.frame_width, config.frame_height)
-        sf1 = frame_sizes[size % 2] / sum(seq[-2:]) * 0.75
-        sf2 = frame_sizes[1] * 0.5
-        mobj1 = fib_spiral_mobj(seq, sf1, add_dots=False)
-        mobj2 = fib_spiral_mobj(seq, sf2, add_dots=False)
-        point = mobj2.get_center() - mobj2[0].get_center()
-        mobj2.move_to(point)
-        mobj1.save_state()
-        self.add(mobj1)
-        self.wait()
-        self.play(Transform(mobj1, mobj2, run_time=3))
-        self.wait(2)
-        self.play(Restore(mobj1, run_time=3))
-        self.wait()
+        manim_image(self)
+        width = config.frame_width * 3 / 4
+        mob = fsmob(6, width=width)
+
+        self.play(spiral_anim(mob))
+        self.wait(2.5)
+
+        self.play(spiral_anim(mob, mode="OUT"))
+        self.wait(0.5)
 
 
 class SceneThree(Scene):
     def construct(self):
-        # sequence range: i to n
-        i, n = 1, 8
-        # i, n = 8,12 # try this!
-        print(fib_seq(n + 1)[i:])
-        seq = fib_seq(i, 1)
-        frame_sizes = (config.frame_width, config.frame_height)
-        sf = frame_sizes[i % 2] / sum(seq[-2:]) * 0.75
-        mobj = fib_spiral_mobj(seq, sf, add_dots=False)
-        anim_in = [(FadeIn(i[0]), Write(i[1]), Create(i[2])) for i in mobj]
-        self.play(*anim_in)
-        self.wait()
+        width = config.frame_width * 3 / 4
+        terms = [4, 8, 12]
+        term = None
+        mob = None
 
-        for j in range(i + 1, n + 1):
-            seq = fib_seq(j, 1)
-            sf = frame_sizes[j % 2] / sum(seq[-2:]) * 0.75
-            _mobj = fib_spiral_mobj(seq, sf, add_dots=False)
-            # transforms existing elements and then adds new ones
-            self.play(ReplacementTransform(mobj, _mobj[:-1]))
-            self.play(FadeIn(_mobj[-1][0]), Write(_mobj[-1][1]), Create(_mobj[-1][2]))
-            self.wait()
-            mobj = _mobj
+        for n in terms:
+            _mob = fsmob(n, width)
 
-        anim_out = [(FadeOut(i[0]), Unwrite(i[1]), Uncreate(i[2])) for i in mobj]
-        self.wait()
-        self.play(*anim_out)
-        self.wait()
+            if mob is None:
+                self.play(spiral_anim(_mob))
+            else:
+                i = term if term < n else -1
+                self.play(ReplacementTransform(mob, _mob[:i]))
+                self.wait(0.5)
+                self.play(spiral_anim(_mob[i:]))
+
+            mob = _mob
+            term = n
+            self.wait(1.5)
+
+        self.play(spiral_anim(mob, mode="OUT", lag_ratio=0))
+        self.wait(0.5)
+
+
+class SceneFour(Scene):
+    def construct(self):
+        n = 12
+        width = config.frame_width * 3 / 4
+        mob = fsmob(n, width)
+        mob.save_state()
+
+        width *= sum(fseq(n)[-2:]) * 3 / 4
+        _mob = fsmob(n, width)
+        _mob.shift(-_mob[0].get_center())
+
+        self.add(mob)
+        self.wait(0.5)
+
+        self.play(Transform(mob, _mob, run_time=6))
+        self.wait(2)
+
+        self.play(Restore(mob, run_time=4))
+        self.wait(0.5)
