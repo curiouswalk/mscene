@@ -17,7 +17,7 @@ def fseq(n, a=0, b=1):
 
 
 def fsmob(n, width=None, height=None):
-    """VGroup of Mobjects creating the Fibonacci spiral.
+    """VGroup of Mobjects for the Fibonacci spiral.
 
     Args:
         n (int): Number of first Fibonacci terms.
@@ -91,8 +91,8 @@ def fsmob(n, width=None, height=None):
     return mobjects
 
 
-def spiral_anim(mob, mode="IN", lag_ratio=0.125, **kwargs):
-    """Return an AnimationGroup for spiral animation."""
+def fsmob_anim(mob, mode="IN", lag_ratio=0.125, **kwargs):
+    """Return an AnimationGroup for the Fibonacci spiral."""
 
     if mode == "IN":
 
@@ -124,14 +124,13 @@ class SceneOne(Scene):
 
 class SceneTwo(Scene):
     def construct(self):
-        manim_image(self)
         width = config.frame_width * 3 / 4
         mob = fsmob(6, width=width)
 
-        self.play(spiral_anim(mob))
+        self.play(fsmob_anim(mob))
         self.wait(2.5)
 
-        self.play(spiral_anim(mob, mode="OUT"))
+        self.play(fsmob_anim(mob, mode="OUT"))
         self.wait(0.5)
 
 
@@ -146,18 +145,18 @@ class SceneThree(Scene):
             _mob = fsmob(n, width)
 
             if mob is None:
-                self.play(spiral_anim(_mob))
+                self.play(fsmob_anim(_mob))
             else:
                 i = term if term < n else -1
                 self.play(ReplacementTransform(mob, _mob[:i]))
                 self.wait(0.5)
-                self.play(spiral_anim(_mob[i:]))
+                self.play(fsmob_anim(_mob[i:]))
 
             mob = _mob
             term = n
             self.wait(1.5)
 
-        self.play(spiral_anim(mob, mode="OUT", lag_ratio=0))
+        self.play(fsmob_anim(mob, mode="OUT", lag_ratio=0))
         self.wait(0.5)
 
 

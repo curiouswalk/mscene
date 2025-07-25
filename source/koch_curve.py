@@ -4,13 +4,22 @@ Mscene: Koch Curve
 https://mscene.curiouswalk.com/scenes/koch-curve
 """
 
+import sys
+
+try:
+    from mscene.fractal import *
+except ImportError:
+    print(
+        "Error: 'mscene.fractal' not found.\nInstall: 'pip install mscene && mscene plugins'",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
 from manim import *
-from mscene.plugins import *
 
 
-class SceneOne(Scene):
+class ExampleOne(Scene):
     def construct(self):
-
         kc = KochCurve(2)
         self.add(kc)
 
@@ -21,9 +30,8 @@ class SceneOne(Scene):
         self.wait()
 
 
-class SceneTwo(Scene):
+class ExampleTwo(Scene):
     def construct(self):
-
         kc1 = KochCurve(level=1, stroke_width=6)
         kc2 = KochCurve(level=2, stroke_width=6, group=False)
         kc3 = KochCurve(level=3, stroke_width=6, group=False)
@@ -52,82 +60,69 @@ class SceneTwo(Scene):
 
 class KochCurveScene(Scene):
     def construct(self):
-
         color = [ManimColor(hex) for hex in ("#0A68EF", "#0ADBEF", "#0A68EF")]
-
-        kc = KochCurve(level=0, stroke_width=8, stroke_color=color)
-        title = Text("Koch Curve\nLevel 0").to_corner(UL, buff=0.75)
+        kc = KochCurve(level=1, stroke_width=8, stroke_color=color)
+        title = Text("Koch Curve\nLevel 1").to_corner(UL, buff=0.75)
 
         self.add(title, kc)
         self.wait()
 
-        levels = (1, 2, 3, 2, 1, 0)
-
-        for level in levels:
+        for level in (2, 3, 2, 1):
             self.play(
-                kc.animate(run_time=1.5).new_level(level, stroke_width=8 - level),
+                kc.animate.new_level(level, stroke_width=8 - level),
                 Transform(title[-1], Text(str(level)).move_to(title[-1])),
             )
             self.wait()
 
 
-class SnowflakeScene(Scene):
+class Snowflake(Scene):
     def construct(self):
-
         color = [ManimColor(hex) for hex in ("#0ADBEF", "#0A68EF", "#1F0AEF")]
-
-        ks = KochSnowflake(level=0, fill_color=color)
-        title = Text("Koch Snowflake\nLevel 0").to_corner(UL, buff=0.75)
+        ks = KochSnowflake(level=1, fill_color=color)
+        title = Text("Koch Snowflake\nLevel 1").to_corner(UL, buff=0.75)
 
         self.add(title, ks)
         self.wait()
 
-        levels = (1, 2, 3, 2, 1, 0)
-
-        for level in levels:
+        for level in (2, 3, 2, 1):
             self.play(
-                ks.animate(run_time=1.5).new_level(level),
+                ks.animate.new_level(level),
                 Transform(title[-1], Text(str(level)).move_to(title[-1])),
             )
             self.wait()
 
 
-class AntisnowflakeScene(Scene):
+class Antisnowflake(Scene):
     def construct(self):
-
         color = [ManimColor(hex) for hex in ("#1F0AEF", "#0A68EF", "#0ADBEF")]
-
-        ks = KochSnowflake(level=0, invert=True, fill_color=color)
-        title = Text("Koch Anti-\nsnowflake\nLevel 0").to_corner(UL, buff=0.75)
+        ks = KochSnowflake(level=1, invert=True, fill_color=color)
+        title = Text("Koch Anti-\nsnowflake\nLevel 1").to_corner(UL, buff=0.75)
 
         self.add(title, ks)
         self.wait()
 
-        levels = (1, 2, 3, 2, 1, 0)
-
-        for level in levels:
+        for level in (2, 3, 2, 1):
             self.play(
-                ks.animate(run_time=1.5).new_level(level),
+                ks.animate.new_level(level),
                 Transform(title[-1], Text(str(level)).move_to(title[-1])),
             )
             self.wait()
 
 
-class DualFlakesScene(Scene):
+class DualFlakes(Scene):
     def construct(self):
-
-        ks1 = KochSnowflake(level=1, fill_color=ManimColor("#5d06e9"))
-        ks2 = KochSnowflake(
+        snowflake = KochSnowflake(level=1, fill_color=ManimColor("#5d06e9"))
+        anti_snowflake = KochSnowflake(
             level=1, invert=True, fill_color=ManimColor("#9e0168")
-        ).align_to(ks1, UP)
+        ).align_to(snowflake, UP)
 
-        self.add(ks1, ks2)
+        self.add(snowflake, anti_snowflake)
         self.wait()
 
-        levels = (2, 3, 2, 1)
-
-        for level in levels:
+        for level in (2, 3, 2, 1):
             self.play(
-                ks1.animate.new_level(level), ks2.animate.new_level(level), run_time=1.5
+                snowflake.animate.new_level(level),
+                anti_snowflake.animate.new_level(level),
+                run_time=1.5,
             )
-            self.wait()
+            self.wait(1.5)
