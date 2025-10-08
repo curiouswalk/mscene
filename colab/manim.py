@@ -6,7 +6,7 @@ with warnings.catch_warnings():
 
 config.disable_caching = True
 config.verbosity = "WARNING"
-config.media_width = "75%"
+config.media_width = "50%"
 config.media_embed = True
 
 Text.set_default(font="STIX Two Text")
@@ -18,5 +18,3 @@ class ManimScene(Scene):
         self.play(banner.create())
         self.play(banner.expand())
         self.wait(2)
-        self.play(FadeOut(banner))
-        self.wait(0.5)
