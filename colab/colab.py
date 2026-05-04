@@ -35,7 +35,7 @@ updateProgress();
 
 def add_file(url, filename):
     path = Path(filename)
-    if not path.exists() and (response := requests.get(url)).ok:
+    if not path.is_file() and (response := requests.get(url)).ok:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(response.content)
 
@@ -81,11 +81,12 @@ def setup(name, lite=False):
         if ipychk:
             display_progress(30) if lite else display_progress(240)
 
-        # add STIX font (stixfonts.org)
+        # add STIX fonts (www.tiro.com/fonts/stix-two)
         add_file(
-            "https://raw.githubusercontent.com/stipub/stixfonts/master/fonts/static_ttf/STIXTwoText-Regular.ttf",
-            "/usr/share/fonts/truetype/stixfonts/STIXTwoText-Regular.ttf",
+            "https://raw.githubusercontent.com/curiouswalk/mscene/refs/heads/main/colab/fonts/stix2.zip",
+            "/usr/share/fonts/opentype/stix2.zip",
         )
+        cmd.append(("unzip", "-q", "-o", "/usr/share/fonts/opentype/stix2.zip", "-d", "/usr/share/fonts/opentype"))
 
         for c in cmd:
             result = subprocess.run(
