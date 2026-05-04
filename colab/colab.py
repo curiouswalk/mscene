@@ -86,7 +86,7 @@ def setup(name, lite=False):
             "https://raw.githubusercontent.com/curiouswalk/mscene/refs/heads/main/colab/fonts/stix2.zip",
             "/usr/share/fonts/opentype/stix2.zip",
         )
-        cmd.append(("unzip", "-q", "-o", "/usr/share/fonts/opentype/stix2.zip", "-d", "/usr/share/fonts/opentype"))
+        cmd.insert(0, ("unzip", "-q", "-o", "/usr/share/fonts/opentype/stix2.zip", "-d", "/usr/share/fonts/opentype/"))
 
         for c in cmd:
             result = subprocess.run(
