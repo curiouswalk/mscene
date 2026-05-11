@@ -16,20 +16,14 @@ else:
     ipychk = ipy is not None
 
 
-def display_progress(value):
-    html = f"""
-<div style='font-size:18px'>
-  <p>Installing Manim</p>
-  <progress id='bar' value='0' max='100'
-    style='width: 25%; accent-color: #41FDFE;'></progress>
-</div>
-
-<script>
-const bar = document.getElementById('bar');
-const updateProgress = () => bar.value < 100 && (bar.value += 0.1, setTimeout(updateProgress, {value}));
-updateProgress();
-</script>
-"""
+def display_progress(t):
+    html = (
+        '<style>.bar{width:25%;min-width:256px;height:8px;margin:.5em 0;border-radius:4px;background:#217f7f;overflow:hidden}'
+        '.fill{height:100%;width:0%;background:#41fdfe;animation:load ' + str(float(t)) + 's linear forwards}'
+        '@keyframes load{to{width:100%}}</style><p style="font-size:1.2rem">Manim Installation</p>'
+        '<div class="bar"><div class="fill"></div></div>'
+    )
+    
     display(HTML(html))
 
 
@@ -86,7 +80,7 @@ def setup(name, lite=False):
             "https://raw.githubusercontent.com/curiouswalk/mscene/refs/heads/main/colab/fonts/stix2.zip",
             "/usr/share/fonts/opentype/stix2.zip",
         )
-        cmd.insert(0, ("unzip", "-q", "-o", "/usr/share/fonts/opentype/stix2.zip", "-d", "/usr/share/fonts/opentype/"))
+        cmd.append(("unzip", "-q", "-o", "/usr/share/fonts/opentype/stix2.zip", "-d", "/usr/share/fonts/opentype"))
 
         for c in cmd:
             result = subprocess.run(
