@@ -18,12 +18,13 @@ else:
 
 def display_progress(t):
     html = (
-        '<style>.bar{width:25%;min-width:256px;height:8px;margin:.5em 0;border-radius:4px;background:#217f7f;overflow:hidden}'
-        '.fill{height:100%;width:0%;background:#41fdfe;animation:load ' + str(float(t)) + 's linear forwards}'
+        '<style>:root{--bar-bg:#c4c7c5;--fill-bg:#0b57d0}'
+        ':root[theme="dark"]{--bar-bg:#444746;--fill-bg:#a8c7fa}'
+        '.bar{width:25%;min-width:256px;height:8px;margin:.5em 0;border-radius:4px;background:var(--bar-bg);overflow:hidden}'
+        '.fill{height:100%;width:0%;background:var(--fill-bg);animation:load ' + str(float(t)) + 's linear forwards}'
         '@keyframes load{to{width:100%}}</style><p style="font-size:1.2rem">Manim Installation</p>'
         '<div class="bar"><div class="fill"></div></div>'
     )
-    
     display(HTML(html))
 
 
