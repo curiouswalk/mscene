@@ -6,14 +6,8 @@ import requests
 
 try:
     from IPython.display import display, HTML, clear_output
-    from IPython import get_ipython
-
 except ImportError:
-    ipychk = False
-
-else:
-    ipy = get_ipython()
-    ipychk = ipy is not None
+    display = HTML = clear_output = lambda *args, **kwargs: None
 
 
 def display_progress(t):
@@ -45,14 +39,6 @@ def check_package(name):
     return status
 
 
-def print_manim():
-    if check_package("manim"):
-        info = "Manim – Mathematical Animation Framework"
-    else:
-        info = f"Manim – Mathematical Animation Framework (Version {version('manim')})"
-    print(info)
-
-
 def setup(name, lite=False):
     cmd = []
     pkg = []
@@ -73,8 +59,7 @@ def setup(name, lite=False):
         cmd.append(("uv", "pip", "install", "-q", name))
 
     if cmd:
-        if ipychk:
-            display_progress(30) if lite else display_progress(240)
+        display_progress(30) if lite else display_progress(240)
 
         # add STIX fonts (www.tiro.com/fonts/stix-two)
         add_file(
@@ -92,10 +77,9 @@ def setup(name, lite=False):
                     c[1:], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
                 )
 
-        if ipychk:
-            clear_output()
-            print_manim()
-            stdout = ipy.kernel.do_shutdown(restart=True)
-
+    if check_package("manim"):
+        info = "[ERROR] Manim is not installed. Please try again."
     else:
-        print_manim()
+        info = f"Manim – Mathematical Animation Framework (Version {version('manim')})"
+    clear_output()
+    print(info)
